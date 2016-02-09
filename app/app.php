@@ -26,8 +26,16 @@
                             <input id='desc' name='desc' type='text' class='form-control'>
                         </div>
                         <div class='form-group'>
-                            <label for='title'>Contact Info</label>
-                            <input id='contact' name='contact' type='text' class='form-control'>
+                            <label for='title'>Name</label>
+                            <input id='name' name='name' type='text' class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            <label for='title'>Email</label>
+                            <input id='email' name='email' type='text' class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            <label for='title'>Phone</label>
+                            <input id='phone' name='phone' type='text' class='form-control'>
                         </div>
                     <button type='submit' class='btn btn-danger'>CLICK</button>
                     </form>
@@ -41,24 +49,33 @@
 
 
     $app->get('/jobs_output', function() {
-        $title = $_GET['title'];
-        $description = $_GET['desc'];
-        $contact = $_GET['contact'];
+        $new_form = new Contact($_GET['name'], $_GET['email'], $_GET['phone']);
 
-        $new_job = new Jobs();
+        $contacts= array($new_form);
+        foreach ($contacts as $contact) {
+            $new_name = $contact->getName();
+            $new_email = $contact->getEmail();
+            $new_phone = $contact->getPhone();
+        }
 
+        $new_job = new Job($_GET['title'], $_GET['desc'], $new_name, $new_email, $new_phone);
         $jobs = array($new_job);
         $output = "";
         if (!empty($jobs)){
+            foreach ($jobs as $job) {
+
                 $output = $output . "
-                $title
-                $description
-                $contact
+                " . $job->getTitle() . "
+                " . $job->getDescription() . "
+                " . $job->name . "
+                " . $job->email . "
+                " . $job->phone . "
                 ";
             }
+                return $output;
+        }
 
-        return $output;
-        var_dump($jobs);
+
     });
         return $app;
 
