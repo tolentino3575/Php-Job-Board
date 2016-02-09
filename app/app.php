@@ -70,13 +70,17 @@
         if (!empty($jobs)){
             foreach ($jobs as $job) {
 
-                $output = $output . "
-                " . $job->getTitle() . "
-                " . $job->getDescription() . "
-                " . $contactArr->getName() . "
-                " . $contactArr->getEmail() . "
-                " . $contactArr->getPhone() . "
-                ";
+                $output = $output .
+                "<head>" . "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>" . "</head>" . "<body>" . "<div class='container'>" .
+                "<h1>" . "Job board" . "</h1>" .
+                "<ul>" .
+                "<li>" . $job->getTitle() . "</li>" .
+                "<li>" . $job->getDescription() . "</li>" .
+                "<li>" . $contactArr->getName() . "</li>" .
+                "<li>" . $contactArr->getEmail() . "</li>" .
+                "<li>" . $contactArr->getPhone() . "</li>" .
+                "</ul>" . "</div>" . "</body>"
+                ;
             }
                 return $output;
         }
