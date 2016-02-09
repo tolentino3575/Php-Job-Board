@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/jobs.php";
+    require_once __DIR__."/../src/contacts.php";
 
     $app = new Silex\Application();
     $app['debug']=true;
@@ -49,16 +50,21 @@
 
 
     $app->get('/jobs_output', function() {
-        $new_form = new Contact($_GET['name'], $_GET['email'], $_GET['phone']);
 
-        $contacts= array($new_form);
-        foreach ($contacts as $contact) {
-            $new_name = $contact->getName();
-            $new_email = $contact->getEmail();
-            $new_phone = $contact->getPhone();
-        }
 
-        $new_job = new Job($_GET['title'], $_GET['desc'], $new_name, $new_email, $new_phone);
+        // $contacts= array($new_form);
+        // foreach ($contacts as $contact) {
+        //     $new_name = $contact->getName();
+        //     $new_email = $contact->getEmail();
+        //     $new_phone = $contact->getPhone();
+        // }
+        $new_contact_person = new Contact($_GET['name'], $_GET['email'], $_GET['phone']);
+        $new_job = new Job($_GET['title'], $_GET['desc'], $new_contact_person);
+        $contactArr = $new_job->getContact();
+        // $new_name = $contactArr->getName();
+        // $new_email = $contactArr->getEmail();
+        // $new_phone = $contactArr->getPhone();
+
         $jobs = array($new_job);
         $output = "";
         if (!empty($jobs)){
@@ -67,9 +73,9 @@
                 $output = $output . "
                 " . $job->getTitle() . "
                 " . $job->getDescription() . "
-                " . $job->name . "
-                " . $job->email . "
-                " . $job->phone . "
+                " . $contactArr->getName() . "
+                " . $contactArr->getEmail() . "
+                " . $contactArr->getPhone() . "
                 ";
             }
                 return $output;
@@ -78,5 +84,6 @@
 
     });
         return $app;
+
 
 ?>

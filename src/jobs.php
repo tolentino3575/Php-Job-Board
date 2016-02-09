@@ -3,17 +3,12 @@
     {
         private $title;
         private $description;
-        public $name;
-        public $email;
-        public $phone;
+        private $contact;
 
-
-     function __construct($title, $description, $name, $email, $phone) {
+     function __construct($title, $description, $contact) {
          $this->title = $title;
          $this->description = $description;
-         $this->name= $name;
-         $this->email= $email;
-         $this->phone= $phone;
+         $this->contact= $contact;
      }
 
      function setTitle($new_title)
@@ -26,6 +21,11 @@
          $this->description=$new_description;
      }
 
+     function setContact($new_contact)
+     {
+         $this->contact=$new_contact;
+     }
+
      function getTitle()
      {
          return $this->title;
@@ -36,46 +36,13 @@
          return $this->description;
      }
 
+    function getContact()
+    {
+        return $this->contact;
     }
 
-    class Contact {
-        private $name;
-        private $email;
-        private $phone;
 
-    function __construct($name, $email, $phone)
-    {
-        $this->name=$name;
-        $this->email=$email;
-        $this->phone=$phone;
-    }
-
-    function setName($new_name)
-    {
-        $this->name=$new_name;
-    }
-    function setEmail($new_email)
-    {
-        $this->email=$new_email;
-    }
-    function setPhone($new_phone)
-    {
-        $this->phone=$new_phone;
-    }
-    function getName()
-    {
-        return $this->name;
-    }
-    function getEmail()
-    {
-        return $this->email;
-    }
-    function getPhone()
-    {
-        return $this->phone;
-    }
-
-}
+   }
 
 
 ?>
