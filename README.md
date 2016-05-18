@@ -25,6 +25,7 @@ This app will allow the user to create and post job listings.
 
 * Php
 * Atom
+* Silex
 * Terminal
 * GitHub
 
